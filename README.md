@@ -21,24 +21,48 @@ Phase 0 (bootstrap) — 폴더 구조, 환경, config 틀만 존재한다.
 
 ## 폴더 구조
 
+### 1) 프로젝트 구조 (git repo — 로컬/서버 공통)
+
+GitHub 저장소의 구조. `git clone` 하면 로컬이든 서버든 동일하게 생성된다.
+`data/raw`와 `outputs`는 내용이 git에 포함되지 않으므로 clone 직후에는 폴더만 있고 비어 있다.
+
 ```
-data/
-  raw/              원본 데이터 (수정 금지, git 미포함)
-  processed/        전처리 결과 (leaf crop 등)
-  refined_labels/   pseudo-label로 정제된 annotation (원본과 별도)
-  splits/           원본 이미지 단위 train/val/test split
-configs/
-  base.yaml                 공통 경로 / seed / class
-  mask2former_stage1.yaml
-  efficientnet_b1.yaml
-  mask2former_final.yaml
-src/
-  datasets/ segmentation/ classification/ pseudo_label/ visualization/ utils/
-outputs/
-  stage1/ classifier/ pseudo_labels/ final/   실험별 하위 폴더 (예: 2026-10-05_1530/)
-  env/                                        check_env.py 결과
-scripts/
-  check_env.py
+chlorosis/            ← git repo 루트
+  data/
+    raw/              원본 데이터 (수정 금지, git 미포함 → clone 시 비어 있음)
+    processed/        전처리 결과 (leaf crop 등)
+    refined_labels/   pseudo-label로 정제된 annotation (원본과 별도)
+    splits/           원본 이미지 단위 train/val/test split
+  configs/
+    base.yaml                 공통 경로 / seed / class
+    mask2former_stage1.yaml
+    efficientnet_b1.yaml
+    mask2former_final.yaml
+  src/
+    datasets/ segmentation/ classification/ pseudo_label/ visualization/ utils/
+  outputs/            실험 결과 (git 미포함)
+    stage1/ classifier/ pseudo_labels/ final/   실험별 하위 폴더 (예: 2026-10-05_1530/)
+    env/                                        check_env.py 결과
+  scripts/
+    check_env.py
+```
+
+### 2) 서버 실행 환경 구조 (연구실 GPU 서버)
+
+서버에서는 **환경 폴더**와 **프로젝트(clone) 폴더**가 분리된다.
+환경은 통째로 `rm -rf ~/chlorosis`로 지울 수 있도록 한곳에 격리한다.
+학습은 서버에서만 수행하며, 데이터셋도 서버의 `data/raw`에만 둔다 (로컬에는 저장공간/GPU 없음).
+
+```
+~/chlorosis/          ← 환경 전용 (git repo 아님, 삭제 가능)
+  env.sh              경로 / 캐시 위치 설정 스크립트
+  .venv/              uv 가상환경 (Python 3.12)
+  .tools/             uv 바이너리
+  (HuggingFace 가중치 캐시 등)
+
+<clone 위치>/chlorosis/   ← git repo (위 "1) 프로젝트 구조"와 동일)
+  data/raw/           ★ 팀원이 데이터셋을 업로드하는 위치
+  ...
 ```
 
 ## 환경 구성
