@@ -9,6 +9,7 @@
 - 폴더 구조: `data/`, `configs/`, `src/`, `outputs/`, `scripts/`
 - `requirements.txt`, `README.md`, config 4개 (데이터 의존 값은 `null`)
 - `scripts/check_env.py` — 환경 정보 JSON 기록
+- README 가독성 개선 (목차 · 표 · 빠른 시작 섹션)
 
 **환경**
 | | 로컬 PC | 연구실 서버 (gpu-server-2) |
@@ -23,8 +24,7 @@
 
 **미해결**
 - 서버 비밀번호 변경 + SSH key 전환 권장
-- 첫 commit 안 함
-- 서버 코드 동기화 방식 미정 (현재 `pscp`)
+- 서버 코드 동기화: git clone/pull 방식으로 전환 (README 4장). 접속정보는 `.env`로 분리(`.env.example` 제공, `.env`는 git 제외)
 
 ## Phase 1 — Dataset Inspection ⏳
 

@@ -42,3 +42,5 @@ Thumbs.db
 
 # Local secrets (server credentials 등) — 절대 커밋 금지
 [Gg][Pp][Uu]server_info.md
+.env
+!.env.example
