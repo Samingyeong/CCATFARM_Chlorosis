@@ -1,6 +1,6 @@
-# Potato Chlorosis AI
+# Perilla leaves(Potato) Chlorosis AI
 
-감자 RGB 이미지에서 잎을 instance 단위로 분리하고 각 잎을 **Healthy / Chlorosis / Leaf Curling**으로 판별하는 모델 프로젝트.
+깻잎(감자) RGB 이미지에서 잎을 instance 단위로 분리하고 각 잎을 **Healthy / Chlorosis / Leaf Curling**으로 판별하는 모델 프로젝트.
 
 참고 학습 흐름:
 
