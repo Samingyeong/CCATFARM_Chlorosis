@@ -8,8 +8,8 @@
 | **Chlorosis** | 황화 (핵심 대상) | 🟨 Yellow |
 | Leaf Curling | 잎 말림 | 🟧 Orange |
 
-> **현재 상태: Phase 0 완료** — 폴더 구조 · 환경 · config 틀만 존재.
-> 데이터셋 / 모델 / 학습 코드는 아직 없음. 진행 기록은 [`Process.md`](Process.md), 작업 원칙은 [`CLAUDE.md`](CLAUDE.md).
+> **현재 상태: Phase 1 진행 중** — 데이터셋(149장, YOLO seg polygon) 서버 업로드 · 점검 완료.
+> 모델 / 학습 코드는 아직 없음. 진행 기록은 [`Process.md`](Process.md), 작업 원칙은 [`CLAUDE.md`](CLAUDE.md).
 
 ---
 

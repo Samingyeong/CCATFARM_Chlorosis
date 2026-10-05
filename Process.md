@@ -26,6 +26,32 @@
 - 서버 비밀번호 변경 + SSH key 전환 권장
 - 서버 코드 동기화: git clone/pull 방식으로 전환 (README 4장). 접속정보는 `.env`로 분리(`.env.example` 제공, `.env`는 git 제외)
 
-## Phase 1 — Dataset Inspection ⏳
+## Phase 1 — Dataset Inspection ⏳ (2026-10-05~)
 
-- 대기: `data/raw/`에 데이터셋 추가 필요
+**데이터 위치 (서버)**
+- 코드: `~/chlorosis_repo` (git clone, `07fcc97`)
+- 원본: `data/raw/Potato Crop abiotic stressors interveinal Chlorosis and Leaf Curling.rar` (1.98GB, RAR5, 무결성 OK)
+- 압축 해제본: `data/raw/potato_chlorosis/{images,labels}/` — 원본 rar와 함께 **읽기 전용**
+- `unrar` 7.12 단독 바이너리: `~/chlorosis/.tools/rar/`
+
+**확인 결과**
+| 항목 | 값 |
+|---|---|
+| 구성 | PNG 149장 / txt 149개, stem 1:1 매칭 |
+| 해상도 | 3456×3456 (127장), 3060×4080 (22장), 전부 RGB |
+| Annotation | YOLO segmentation polygon (`class x1 y1 ...`, 0~1 정규화) |
+| Instance | 총 4,244개, 이미지당 3~80 (평균 28.5), 빈/깨진 라벨 없음 |
+| 공식 split | 없음 |
+
+| id | class (사용자 확인) | instance | 포함 이미지 |
+|---|---|---|---|
+| 0 | Unknown | 1,239 | 119 |
+| 1 | Interveinal Chlorosis | 802 | 68 |
+| 2 | Leaf Curling | 820 | 68 |
+| 3 | Healthy | 1,383 | 77 |
+
+- `configs/base.yaml`에 dataset 경로 · 형식 · `raw_class_map` · `unknown_label` 반영
+
+**남은 작업**
+- polygon 시각화로 라벨 품질 확인
+- 이미지 단위 train/val/test split 계획 (class 분포 고려)
