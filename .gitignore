@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Logs / temp
+*.log
+*.tmp
+tmp/
+.cache/
+
+# Data: 원본/가공 데이터는 git에 넣지 않는다 (폴더 구조만 유지)
+data/raw/*
+data/processed/*
+data/refined_labels/*
+data/splits/*
+!data/**/.gitkeep
+
+# Experiment outputs / checkpoints
+outputs/*/*
+!outputs/*/.gitkeep
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Local secrets (server credentials 등) — 절대 커밋 금지
+[Gg][Pp][Uu]server_info.md

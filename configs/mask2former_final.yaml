@@ -1,0 +1,12 @@
+# Final Mask2Former retrained on refined annotations (Phase 5)
+base: mask2former_stage1.yaml
+
+dataset:
+  refined_annotation: null  # data/refined_labels 아래 생성될 refined annotation 경로
+  pseudo_label_threshold: null
+
+model:
+  init_from: null           # Stage 1 checkpoint 또는 사전학습 체크포인트
+
+output:
+  dir: outputs/final

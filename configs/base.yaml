@@ -1,0 +1,30 @@
+# 공통 설정. 단계별 config는 `base: base.yaml`로 이 파일을 상속하고 필요한 값만 덮어쓴다.
+# null 값은 아직 확정되지 않은 항목이다 (데이터셋 확인 후 Phase 1에서 채운다).
+
+project: potato_chlorosis
+seed: 42
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  refined_labels_dir: data/refined_labels
+  splits_dir: data/splits
+  output_root: outputs
+
+dataset:
+  annotation_format: null   # Phase 1에서 실제 파일 확인 후 확정
+  official_split: null      # 공식 train/val/test split 존재 여부
+  split_level: image        # leaf crop이 아닌 원본 이미지 단위로 split (leakage 방지)
+
+classes:
+  - Healthy
+  - Chlorosis
+  - Leaf Curling
+
+unknown_label: null         # Unknown/ambiguous label 존재 여부와 이름은 Phase 1에서 확정
+
+visualization:
+  colors:
+    Healthy: green
+    Chlorosis: yellow
+    Leaf Curling: orange

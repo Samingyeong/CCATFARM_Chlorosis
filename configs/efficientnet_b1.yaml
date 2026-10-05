@@ -1,0 +1,43 @@
+# Leaf crop classifier for Unknown label refinement (Phase 3-4). 최종 inference 모델 아님.
+base: base.yaml
+
+model:
+  library: torchvision      # torchvision.models.efficientnet_b1 (timm은 대안)
+  arch: efficientnet_b1
+  pretrained: imagenet
+
+crop:
+  source: null              # GT mask 기반 / Stage 1 prediction 기반 — Phase 3에서 결정
+  use_mask: true            # bbox crop만이 아닌 mask 기반 추출
+  padding: null
+
+train:
+  epochs: null
+  batch_size: null
+  lr: null
+  weight_decay: null
+  num_workers: null
+  class_weighting: null     # class imbalance 확인 후 결정
+
+input:
+  size: null
+
+augment:
+  hflip: true
+  rotation_deg: null
+  brightness: null
+  contrast: null
+  hue: 0.0
+  saturation: 0.0
+
+pseudo_label:
+  thresholds: [0.90, 0.95]  # 평가할 후보값
+  keep_below_threshold_as_unknown: true
+  overwrite_original: false # 원본 annotation은 절대 덮어쓰지 않음
+
+checkpoint:
+  resume: null
+
+output:
+  dir: outputs/classifier
+  pseudo_label_dir: outputs/pseudo_labels

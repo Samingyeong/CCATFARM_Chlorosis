@@ -1,0 +1,37 @@
+# Stage 1: potato leaf instance segmentation (Phase 2)
+base: base.yaml
+
+model:
+  library: transformers     # Mask2FormerForUniversalSegmentation
+  pretrained: null          # Phase 2에서 COCO-instance 사전학습 체크포인트 확정
+
+train:
+  epochs: null
+  batch_size: null
+  lr: null
+  weight_decay: null
+  num_workers: null
+  amp: true
+  grad_accum_steps: 1
+
+input:
+  size: null                # 데이터셋 해상도 확인 후 확정
+
+augment:
+  hflip: true
+  rotation_deg: null
+  scale: null
+  crop: null
+  brightness: null          # mild only
+  contrast: null            # mild only
+  hue: 0.0                  # Chlorosis는 색 변화가 핵심이므로 기본 비활성
+  saturation: 0.0
+
+eval:
+  score_threshold: null
+
+checkpoint:
+  resume: null
+
+output:
+  dir: outputs/stage1
