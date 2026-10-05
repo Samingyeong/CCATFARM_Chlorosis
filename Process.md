@@ -52,6 +52,13 @@
 
 - `configs/base.yaml`에 dataset 경로 · 형식 · `raw_class_map` · `unknown_label` 반영
 
+**라벨 시각화** (`scripts/visualize_labels.py` → 서버 `outputs/inspection/labels/`)
+- polygon 경계는 잎 윤곽과 잘 맞음. 좌표 범위 · class id 이상 없음
+- **부분 annotation**: 화면의 모든 잎이 라벨된 것은 아님 (흐린 배경 잎 · 작은 잎 다수 미라벨) → Stage 1 학습 시 미라벨 잎이 background로 학습되는 문제 고려 필요
+- 큰 Chlorosis polygon(이미지의 최대 65%)은 오류 아님 — 잎 1~3장 근접 촬영 이미지 (예: IMG_060~074)
+- 촬영 거리 혼재: 근접 촬영 ↔ 군락 전체 → 이미지당 instance 3~80
+- 연속 번호 이미지가 같은 개체/세션으로 보임 → split 시 인접 이미지 묶음 leakage 확인 필요
+- Chlorosis crop 중 육안상 Healthy와 구분이 약한 사례 있음 (경미한 황화)
+
 **남은 작업**
-- polygon 시각화로 라벨 품질 확인
-- 이미지 단위 train/val/test split 계획 (class 분포 고려)
+- 이미지 단위 train/val/test split 계획 (class 분포 · 연속 촬영 묶음 고려)
